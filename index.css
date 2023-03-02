@@ -1,0 +1,22 @@
+/* center the content vertically and horizontally */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* style the student ID to be big and bold */
+#student-id {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+/* style the quote to be italicized and centered */
+#quote {
+    font-style: italic;
+    text-align: center;
+}
