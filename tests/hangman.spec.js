@@ -13,7 +13,7 @@ test('hangman game completes successfully', async ({ page }) => {
         await expect(page.locator('#guesses-remaining')).toHaveText(`Guesses remaining: 6`);
     }
 
-    await expect(page.locator('#guess-result')).toHaveText('Congratulations, you won!');
+    await expect(page.locator('#hangman-result')).toHaveText('Congratulations, you won!');
 });
 
 test('hangman game detects wrong guesses and still completes successfully', async ({ page }) => {
@@ -46,5 +46,5 @@ test('hangman game detects wrong guesses and still completes successfully', asyn
         await clickKeyboard(character, `Guesses remaining: ${guessCount - partWrong.length}`);
     }
 
-    await expect(page.locator('#guess-result')).toHaveText('Congratulations, you won!');
+    await expect(page.locator('#hangman-result')).toHaveText('Congratulations, you won!');
 });
