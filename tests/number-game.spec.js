@@ -15,7 +15,6 @@ test('Number game wins correctly', async ({ page }) => {
         const [_, min, max] = regex.exec(rangeText);
 
         guess = Math.round((+max + +min) / 2);
-        console.log(max, min, guess);
         await page.locator('#guess-input').fill(guess + '');
         await page.locator('#guess-button').click();
 
