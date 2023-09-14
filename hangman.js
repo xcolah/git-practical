@@ -7,6 +7,7 @@ let guessesRemaining = maxGuesses;
 
 const wordDisplay = document.getElementById('word-display');
 const guessesRemainingText = document.getElementById('guesses-remaining');
+const keyboard = document.getElementById('keyboard');
 const guessInput = document.getElementById('guess-input');
 const guessButton = document.getElementById('guess-button');
 const guessResult = document.getElementById('guess-result');
@@ -21,9 +22,43 @@ wordDisplay.textContent = displayText.trim();
 // update the guesses remaining display
 guessesRemainingText.textContent = `Guesses remaining: ${guessesRemaining}`;
 
-guessButton.addEventListener('click', () => {
-    const guess = guessInput.value.toLowerCase();
+// enable the buttons for the letters that have not been guessed yet
+const enableButtons = () => {
+    const buttons = keyboard.querySelectorAll('.key');
+    buttons.forEach((letterButton) => {
+        if (!guessedLetters.has(letterButton.textContent)) {
+            letterButton.disabled = false;
+        }
+    });
+};
 
+const disableButtons = () => {
+    const buttons = keyboard.querySelectorAll('.key');
+    buttons.forEach((letterButton) => {
+        if (!guessedLetters.has(letterButton.textContent)) {
+            letterButton.disabled = true;
+        }
+    });
+};
+
+const disableButton = (letter) => {
+    const button = keyboard.querySelector(`.key[value="${letter}"]`);
+    button.disabled = true;
+};
+
+// update the keyboard display
+const updateKeyboard = () => {
+    const buttons = keyboard.querySelectorAll('.key');
+    buttons.forEach((letterButton) => {
+        if (guessedLetters.has(letterButton.textContent)) {
+            letterButton.classList.add('guessed');
+        } else {
+            letterButton.classList.remove('guessed');
+        }
+    });
+};
+
+const processGuess = (guess) => {
     if (guessedLetters.has(guess)) {
         guessResult.textContent = 'You already guessed that letter.';
     } else if (guess.length !== 1) {
@@ -44,23 +79,32 @@ guessButton.addEventListener('click', () => {
             wordDisplay.textContent = displayArray.join(' ');
             if (!wordDisplay.textContent.includes('_')) {
                 guessResult.textContent = 'Congratulations, you won!';
-                guessInput.disabled = true;
-                guessButton.disabled = true;
+                disableButtons();
             }
         } else {
             // the guess was incorrect
             guessesRemaining--;
+            guessesRemainingText.textContent = `Guesses remaining: ${guessesRemaining}`;
             if (guessesRemaining === 0) {
                 guessResult.textContent = `Sorry, you lost. The word was "${word}".`;
-                guessInput.disabled = true;
-                guessButton.disabled = true;
+                disableButtons();
             } else {
                 guessResult.textContent = 'Incorrect guess.';
-                guessesRemainingText.textContent = `Guesses remaining: ${guessesRemaining}`;
             }
         }
-    }
 
-    guessInput.value = '';
-    guessInput.focus();
+        disableButton(guess);
+        updateKeyboard();
+    }
+};
+
+// initialize the keyboard display
+enableButtons();
+
+// add event listeners to the keyboard buttons
+keyboard.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.classList.contains('key')) {
+        processGuess(target.textContent);
+    }
 });
