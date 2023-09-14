@@ -8,8 +8,8 @@ let guessesRemaining = maxGuesses;
 const wordDisplay = document.getElementById('word-display');
 const guessesRemainingText = document.getElementById('guesses-remaining');
 const keyboard = document.getElementById('keyboard');
-const guessInput = document.getElementById('guess-input');
-const guessButton = document.getElementById('guess-button');
+
+// HINT
 const guessResult = document.getElementById('guess-result');
 
 // initialize the word display with underscores for each letter in the word
