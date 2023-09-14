@@ -21,3 +21,68 @@ body {
     font-style: italic;
     text-align: center;
 }
+
+/* Style the keyboard buttons */
+#keyboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.key {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.key:hover {
+    background-color: #e0e0e0;
+}
+
+.key:active {
+    background-color: #d0d0d0;
+}
+
+.guessed {
+    background-color: #c0c0c0;
+    color: #ffffff;
+}
+
+/* Style the game controls */
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.key {
+    font-family: monospace;
+    text-transform: uppercase;
+    margin: 5px;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.key:hover {
+    background-color: #e0e0e0;
+}
+
+.key:active {
+    background-color: #d0d0d0;
+}
+
+.guessed {
+    background-color: #c0c0c0;
+    color: #ffffff;
+}
